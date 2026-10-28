@@ -4,14 +4,21 @@
   const $ = (s, r = document) => r.querySelector(s);
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- holnap dátuma ---------- */
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  /* ---------- az időpont: csütörtök, október 29. 19:00 ---------- */
+  const EVENT = new Date(2026, 9, 29);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const diff = Math.round((EVENT - today) / 86400000);
   const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
-  const huDay = new Intl.DateTimeFormat('hu-HU', { weekday: 'long' }).format(tomorrow);
-  const huMd = new Intl.DateTimeFormat('hu-HU', { month: 'long', day: 'numeric' }).format(tomorrow);
+  const huDay = new Intl.DateTimeFormat('hu-HU', { weekday: 'long' }).format(EVENT);
+  const huMd = new Intl.DateTimeFormat('hu-HU', { month: 'long', day: 'numeric' }).format(EVENT);
   const DATE_HU = `${cap(huDay)}, ${huMd}`;
+  // "ma" / "holnap" / "csütörtök" attól függően, mikor nyitják meg
+  const DAY = diff === 0 ? 'Ma' : diff === 1 ? 'Holnap' : 'Csütörtök';
+  const ON = diff === 0 ? 'ma' : diff === 1 ? 'holnap' : 'csütörtökön';
   document.querySelectorAll('[data-date]').forEach((el) => { el.textContent = DATE_HU; });
+  document.querySelectorAll('[data-day]').forEach((el) => { el.textContent = DAY; });
+  document.querySelectorAll('[data-on]').forEach((el) => { el.textContent = ON; });
 
   /* ---------- szövegek ---------- */
   const NOPE = [
@@ -178,7 +185,7 @@
   });
 
   $('#btnShare').addEventListener('click', async () => {
-    const msg = `Match! 🥂 Holnap (${DATE_HU}) 19:00, Time Out Market Budapest, Blaha Lujza tér 1. Csak egy pohár bor, a többi a második randi 😏 Ott leszek, Szelma!`;
+    const msg = `Match! 🥂 ${DATE_HU} 19:00, Time Out Market Budapest, Blaha Lujza tér 1. Csak egy pohár bor, a többi a második randi 😏 Ott leszek, Salma!`;
     if (navigator.share) {
       try { await navigator.share({ text: msg }); return; } catch (e) { if (e && e.name === 'AbortError') return; }
     }
