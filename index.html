@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#FF3D6E">
-  <meta name="description" content="Szelma – holnap 19:00, Time Out Market, pohár bor koccintás. Húzd jobbra.">
+  <meta name="description" content="Szelma – holnap 19:00, Time Out Market, egy pohár bor. Húzd jobbra.">
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'">
   <title>Szelma – koccintunk?</title>
@@ -21,19 +21,15 @@
       </svg>
       <span>szelma</span>
     </div>
-    <div class="langs" role="group" aria-label="Fordítás / Translation / 翻译">
-      <button class="lang" type="button" data-lang="en" aria-pressed="false" title="English" aria-label="English translation">🇬🇧</button>
-      <button class="lang" type="button" data-lang="zh" aria-pressed="false" title="中文" aria-label="中文翻译">🇨🇳</button>
-    </div>
     <div class="counter" id="counter" aria-live="polite">1 / 3</div>
   </header>
 
   <main class="app" id="app">
-    <section class="stage" aria-label="Kártyák / Cards / 卡片">
+    <section class="stage" aria-label="Kártyák">
       <div class="deck" id="deck">
 
         <!-- 1 · koccintás -->
-        <article class="card" data-i="0" aria-label="Holnap 19:00, pohár bor koccintás">
+        <article class="card" data-i="0" aria-label="Holnap 19:00, egy pohár bor">
           <div class="art art-clink">
             <svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
               <defs>
@@ -55,14 +51,13 @@
             </svg>
           </div>
           <div class="bars" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
-          <div class="stamp like">KOCCINTUNK</div><div class="stamp nope">NEM? 😏</div>
+          <div class="stamp like">KOCCINTUNK</div><div class="stamp nope">NAAA 🥺</div>
           <div class="info">
             <h2>Holnap 19:00 <span class="tick" aria-label="hitelesített">✓</span></h2>
-            <p class="sub">Szelma · <span data-date="hu"></span><span class="en" data-date="en"></span><span class="zh" data-date="zh"></span></p>
-            <p class="bio">Pohár bor, koccintás, és egy kis szelmáskodás.</p>
-            <div class="trs"><span class="tr en">A glass of wine, a clink, and a little mischief.</span><span class="tr zh">一杯红酒，碰个杯，再加一点点调皮。</span></div>
+            <p class="sub">Szelma · <span data-date></span></p>
+            <p class="bio">Holnap csak egy pohár bor. Most még nincs ..., az a második randi 😏</p>
             <ul class="chips">
-              <li>🥂 Pohár bor koccintás<span class="en"> · wine clink</span><span class="zh"> · 红酒碰杯</span></li>
+              <li>🥂 Egy pohár bor</li>
               <li>📍 Time Out Market</li>
             </ul>
           </div>
@@ -92,15 +87,14 @@
             </svg>
           </div>
           <div class="bars" aria-hidden="true"><i></i><i class="on"></i><i></i></div>
-          <div class="stamp like">KOCCINTUNK</div><div class="stamp nope">NEM? 😏</div>
+          <div class="stamp like">KOCCINTUNK</div><div class="stamp nope">NAAA 🥺</div>
           <div class="info">
             <h2>Time Out Market <span class="tick" aria-hidden="true">📍</span></h2>
             <p class="sub">Blaha Lujza tér 1., Budapest</p>
             <p class="bio">A pin már le van szúrva. Neked csak meg kell jelenned.</p>
-            <div class="trs"><span class="tr en">The pin is already dropped. You just have to show up.</span><span class="tr zh">定位已经标好了，你只需要出现。</span></div>
             <ul class="chips">
-              <li>🍷 Bor<span class="en"> · wine</span><span class="zh"> · 红酒</span></li>
-              <li>😂 Nevetés<span class="en"> · laughs</span><span class="zh"> · 欢笑</span></li>
+              <li>🍷 Bor</li>
+              <li>😂 Nevetés</li>
             </ul>
           </div>
         </article>
@@ -117,15 +111,14 @@
             <div class="bigtime" aria-hidden="true">19:00</div>
           </div>
           <div class="bars" aria-hidden="true"><i></i><i></i><i class="on"></i></div>
-          <div class="stamp like">KOCCINTUNK</div><div class="stamp nope">NEM? 😏</div>
+          <div class="stamp like">KOCCINTUNK</div><div class="stamp nope">NAAA 🥺</div>
           <div class="info">
             <h2>Pontosan 19:00 <span class="tick" aria-hidden="true">⏰</span></h2>
-            <p class="sub">Holnap · <span data-date="hu"></span><span class="en" data-date="en"></span><span class="zh" data-date="zh"></span></p>
+            <p class="sub">Holnap · <span data-date></span></p>
             <p class="bio">Szelma-pontosság: a 19:05 még simán belefér.</p>
-            <div class="trs"><span class="tr en">Szelma-punctual: 19:05 totally counts.</span><span class="tr zh">Szelma 式准时：19:05 完全算准时。</span></div>
             <ul class="chips">
-              <li>🥂 Koccintás<span class="en"> · cheers</span><span class="zh"> · 干杯</span></li>
-              <li>😏 Szelmáskodás<span class="en"> · mischief</span><span class="zh"> · 调皮</span></li>
+              <li>🥂 Koccintás</li>
+              <li>😏 Szelmáskodás</li>
             </ul>
           </div>
         </article>
@@ -134,11 +127,11 @@
     </section>
 
     <div class="actions">
-      <button class="act nope" id="btnNope" type="button" aria-label="Nem / Nope / 不要">&#10005;</button>
-      <button class="act super" id="btnSuper" type="button" aria-label="Szuper koccintás / Super clink / 超级碰杯">&#9733;&#xFE0E;</button>
-      <button class="act like" id="btnLike" type="button" aria-label="Koccintunk / Cheers / 干杯">&#9829;&#xFE0E;</button>
+      <button class="act nope" id="btnNope" type="button" aria-label="Nem">&#10005;</button>
+      <button class="act super" id="btnSuper" type="button" aria-label="Szuper koccintás">&#9733;&#xFE0E;</button>
+      <button class="act like" id="btnLike" type="button" aria-label="Koccintunk">&#9829;&#xFE0E;</button>
     </div>
-    <p class="hint">Húzd jobbra, és koccintunk<span class="en"> · Swipe right and we clink</span><span class="zh"> · 向右滑，我们就碰杯</span></p>
+    <p class="hint">Húzd jobbra, és koccintunk</p>
   </main>
 
   <!-- match -->
@@ -152,25 +145,23 @@
       <div class="m-head">
         <h1 id="matchTitle" tabindex="-1">Ez egy match!</h1>
         <p class="m-sub">Te és Szelma holnap koccintotok. 🥂</p>
-        <div class="trs"><span class="tr en">It's a match! You and Szelma are clinking glasses tomorrow.</span><span class="tr zh">配对成功！你和 Szelma 明天碰杯。</span></div>
       </div>
 
       <article class="mcard" id="mcard" aria-label="Randi részletek">
-        <div class="mrow"><span>🗓️</span><div><small>Mikor<span class="en"> · When</span><span class="zh"> · 时间</span></small><b><span data-date="hu"></span> · 19:00</b><i class="mini"><span class="en" data-date="en"></span><span class="zh" data-date="zh"></span></i></div></div>
-        <div class="mrow"><span>📍</span><div><small>Hol<span class="en"> · Where</span><span class="zh"> · 地点</span></small><b>Time Out Market Budapest</b><em>Blaha Lujza tér 1., 1085 Budapest</em><i class="mini"><span class="en">Open daily until 23:30, plenty of time for wine</span><span class="zh">每天营业到 23:30，喝酒时间绰绰有余</span></i></div></div>
-        <div class="mrow"><span>🥂</span><div><small>Mit<span class="en"> · What</span><span class="zh"> · 内容</span></small><b>Pohár bor koccintás</b><i class="mini"><span class="en">A glass of wine, a clink</span><span class="zh">一杯红酒，碰个杯</span></i></div></div>
-        <div class="mfoot" id="mfoot"></div>
+        <div class="mrow"><span>🗓️</span><div><small>Mikor</small><b><span data-date></span> · 19:00</b></div></div>
+        <div class="mrow"><span>📍</span><div><small>Hol</small><b>Time Out Market Budapest</b><em>Blaha Lujza tér 1., 1085 Budapest</em></div></div>
+        <div class="mrow"><span>🥂</span><div><small>Mit</small><b>Egy pohár bor</b><em>A többi a második randi 😏</em></div></div>
+        <div class="mfoot">Figyelem: a koccintás nem helyettesíti a szemkontaktust.</div>
       </article>
 
-      <div class="block shot">
+      <div class="shot">
         <p>📸 Készíts róla screenshotot, és küldd el nekem. Ez a hivatalos match.</p>
-        <div class="trs"><span class="tr en">Take a screenshot and send it to me. It's the official match.</span><span class="tr zh">截个图发给我，这就是正式配对确认。</span></div>
       </div>
 
       <div class="m-actions">
-        <a class="mbtn primary" id="btnMap" href="https://www.google.com/maps/search/?api=1&amp;query=Time+Out+Market+Budapest+Blaha+Lujza+t%C3%A9r+1" target="_blank" rel="noopener noreferrer"><span>📍 Megnyitom a térképen</span><span class="mini"><span class="en">Open in maps</span><span class="zh">在地图中打开</span></span></a>
-        <button class="mbtn" id="btnShare" type="button"><span>💬 Üzenet másolása</span><span class="mini"><span class="en">Copy message</span><span class="zh">复制消息</span></span></button>
-        <button class="mlink" id="btnAgain" type="button">↺ Még egyszer<span class="en"> · Again</span><span class="zh"> · 再来一次</span></button>
+        <a class="mbtn primary" id="btnMap" href="https://www.google.com/maps/search/?api=1&amp;query=Time+Out+Market+Budapest+Blaha+Lujza+t%C3%A9r+1" target="_blank" rel="noopener noreferrer">📍 Megnyitom a térképen</a>
+        <button class="mbtn" id="btnShare" type="button">💬 Üzenet másolása</button>
+        <button class="mlink" id="btnAgain" type="button">↺ Még egyszer</button>
       </div>
     </div>
   </section>

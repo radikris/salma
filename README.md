@@ -1,9 +1,11 @@
 # Szelma 🥂
 
-Tinder-stílusú, játékos meghívó: **holnap 19:00, Time Out Market (Blaha Lujza tér 1.), pohár bor koccintás.**
-Húzd jobbra a kártyát. Balra húzásnál a kártya bumerángként visszajön. 😏
+Tinder-stílusú, játékos meghívó: **holnap 19:00, Time Out Market (Blaha Lujza tér 1.), egy pohár bor.**
+A többi a második randi. 😏
 
-Magyarul, a zászlókkal vicces angol és kínai fordítás kapcsolható be. Statikus oldal, nincs szerver és nincs követés.
+Húzd jobbra a kártyát. Balra húzásnál a kártya visszajön: "Naaa, ne csináld, látni akarlak 🥺".
+
+Statikus oldal, nincs szerver és nincs követés. A "holnap" dátuma a böngészőből számolódik.
 
 ## Deploy
 

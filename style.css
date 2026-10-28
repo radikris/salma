@@ -32,15 +32,6 @@ body {
 .brand { display: flex; align-items: center; gap: 7px; font-weight: 900; font-size: 1.6rem; letter-spacing: -.05em; }
 .brand span { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .logo { width: 28px; height: 28px; }
-.langs { display: flex; gap: 6px; margin-right: auto; }
-.lang {
-  appearance: none; width: 32px; height: 32px; padding: 0; display: grid; place-items: center;
-  font-size: 1.05rem; line-height: 1; cursor: pointer; border-radius: 50%;
-  background: #fff; border: 2px solid #EBD9DF; box-shadow: 0 2px 0 rgba(42, 16, 48, .12);
-  transition: transform .2s var(--ease), border-color .2s, box-shadow .2s;
-}
-.lang:hover { transform: translateY(-2px) rotate(-8deg); }
-.lang[aria-pressed="true"] { border-color: var(--coral); box-shadow: 0 0 0 3px rgba(255, 61, 110, .25); }
 .counter { font-weight: 800; font-size: .85rem; color: var(--muted); background: #fff; padding: 5px 11px; border-radius: 999px; border: 2px solid #EBD9DF; }
 
 /* ---------- pakli ---------- */
@@ -202,30 +193,6 @@ body {
 .toast.show { transform: translate(-50%, 0); opacity: 1; }
 #confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
 
-/* ---------- háromnyelvű szöveg: alapból csak magyar ---------- */
-.trs { display: flex; flex-direction: column; gap: 2px; margin-top: 4px; }
-.tr { display: block; font-size: .8rem; font-weight: 600; line-height: 1.38; color: var(--muted); }
-.tr::before {
-  display: inline-block; margin-right: 6px; padding: 1px 5px; border-radius: 6px; vertical-align: 1px;
-  font-size: .6rem; font-weight: 800; letter-spacing: .04em; color: var(--ink); background: #FFE3D6;
-}
-.tr.en::before { content: "EN"; }
-.tr.zh::before { content: "中文"; background: #F6D9E4; }
-.info .tr { color: rgba(255, 255, 255, .88); }
-.info .tr::before, .m-head .tr::before, .shot .tr::before { background: rgba(255, 255, 255, .24); color: #fff; }
-.m-head .tr, .shot .tr { color: rgba(255, 255, 255, .92); }
-
-.en, .zh { display: none; }
-body.show-en .en, body.show-zh .zh { display: inline; }
-body.show-en .tr.en, body.show-zh .tr.zh { display: block; }
-body:not(.show-en):not(.show-zh) .trs { display: none; }
-
-.mini { display: none; font-size: .76rem; font-weight: 600; line-height: 1.3; color: var(--muted); font-style: normal; }
-body.show-en .mini, body.show-zh .mini { display: block; }
-body.show-en.show-zh .mini .en::after { content: " · "; }
-.mbtn .mini { color: inherit; opacity: .8; font-size: .72rem; font-weight: 700; }
-.mbtn.primary .mini { color: var(--coral); }
-
 /* ---------- kicsi kijelzők ---------- */
 @media (max-height: 720px) {
   .info { padding-top: 46px; }
@@ -236,8 +203,6 @@ body.show-en.show-zh .mini .en::after { content: " · "; }
   *, *::before, *::after { animation-duration: .001ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; }
   .card { transition-duration: .1s; }
 }
-.toast .en, .toast .zh { display: none; }
-body.show-en .toast .en, body.show-zh .toast .zh { display: block; }
 
 /* ===== javítás: a pakli kitölti a helyet, a grafika a kártya felső részén marad ===== */
 .stage { align-items: stretch; }
@@ -251,3 +216,8 @@ body.show-en .toast .en, body.show-zh .toast .zh { display: block; }
 
 /* a kirepülő kártya ne szélesítse a lapot (mobilon ez kicsinyítést okozna) */
 html, body, .app, .stage { overflow-x: clip; }
+
+/* csak magyar: a számláló a jobb szélre kerül, a toast kicsit nagyobb (ez a "naaa, látni akarlak") */
+.counter { margin-left: auto; }
+.toast { font-size: 1rem; padding: 12px 20px; }
+.m-sub { margin-top: 6px; }

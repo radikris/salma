@@ -4,90 +4,29 @@
   const $ = (s, r = document) => r.querySelector(s);
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- nyelvváltó: magyar mindig látszik, a zászlók az EN / 中文 sorokat kapcsolják ---------- */
-  const LS_KEY = 'szelma-lang';
-  const langs = { en: false, zh: false };
-  try { Object.assign(langs, JSON.parse(localStorage.getItem(LS_KEY) || '{}')); } catch { /* nincs tárhely, nem baj */ }
-
-  function applyLangs() {
-    document.body.classList.toggle('show-en', !!langs.en);
-    document.body.classList.toggle('show-zh', !!langs.zh);
-    document.querySelectorAll('.lang').forEach((b) => b.setAttribute('aria-pressed', String(!!langs[b.dataset.lang])));
-    try { localStorage.setItem(LS_KEY, JSON.stringify({ en: !!langs.en, zh: !!langs.zh })); } catch { /* ok */ }
-  }
-  document.querySelectorAll('.lang').forEach((b) => b.addEventListener('click', () => {
-    langs[b.dataset.lang] = !langs[b.dataset.lang];
-    applyLangs();
-  }));
-  applyLangs();
-
   /* ---------- holnap dátuma ---------- */
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
   const huDay = new Intl.DateTimeFormat('hu-HU', { weekday: 'long' }).format(tomorrow);
   const huMd = new Intl.DateTimeFormat('hu-HU', { month: 'long', day: 'numeric' }).format(tomorrow);
-  const D = {
-    hu: `${cap(huDay)}, ${huMd}`,
-    en: new Intl.DateTimeFormat('en-GB', { weekday: 'long', day: 'numeric', month: 'long' }).format(tomorrow),
-    zh: new Intl.DateTimeFormat('zh-CN', { month: 'long', day: 'numeric', weekday: 'long' }).format(tomorrow),
-  };
-  document.querySelectorAll('[data-date]').forEach((el) => {
-    const k = el.dataset.date;
-    el.textContent = el.classList.contains('en') || el.classList.contains('zh') ? ` · ${D[k]}` : D[k];
-  });
-  // a .mini-n belüli dátum nem kap elválasztót, azt a .mini CSS rakja
-  document.querySelectorAll('.mini [data-date]').forEach((el) => { el.textContent = D[el.dataset.date]; });
+  const DATE_HU = `${cap(huDay)}, ${huMd}`;
+  document.querySelectorAll('[data-date]').forEach((el) => { el.textContent = DATE_HU; });
 
-  /* ---------- háromnyelvű szövegek ---------- */
-  const T = {
-    nope: [
-      { hu: 'Hoppá, a kártya visszajött. Szelma nem adja fel 😏', en: 'Oops, the card came back. Szelma never gives up.', zh: '哎呀，卡片又飞回来了。Szelma 绝不放弃。' },
-      { hu: 'A balra húzás technikai hiba volt. Biztos.', en: 'Swiping left was a technical error. Surely.', zh: '向左滑是技术故障。肯定是。' },
-      { hu: 'Bumeráng-kártya. Nem lehet eldobni 🪃', en: 'Boomerang card. Cannot be thrown away.', zh: '回旋镖卡片，扔不掉。' },
-      { hu: 'Jó, jó, de a bor már le van hűtve.', en: 'Fine, fine, but the wine is already chilled.', zh: '好吧好吧，可是酒已经冰好了。' },
-    ],
-    like: [
-      { hu: 'Jó irány! 🥂', en: 'Good direction!', zh: '方向正确！' },
-      { hu: 'Még egy, és már csak a bor hiányzik.', en: 'One more, and only the wine is missing.', zh: '再来一张，就只差酒了。' },
-    ],
-    foot: { hu: 'Figyelem: a koccintás nem helyettesíti a szemkontaktust.', en: 'Warning: clinking does not replace eye contact.', zh: '提醒：碰杯不能代替眼神交流。' },
-    toastCopy: { hu: 'Üzenet kimásolva 💬', en: 'Message copied', zh: '消息已复制' },
-    toastFail: { hu: 'Nem sikerült másolni, jelöld ki kézzel', en: 'Copy failed, select it by hand', zh: '复制失败，请手动选择' },
-  };
-
-  // egy elem tartalmát három sorra tölti: magyar + EN + 中文 (mindig textContent, nincs innerHTML)
-  function fill(el, t) {
-    el.replaceChildren();
-    const hu = document.createElement('span');
-    hu.className = 'hu';
-    hu.textContent = t.hu;
-    el.append(hu);
-    for (const lang of ['en', 'zh']) {
-      const s = document.createElement('span');
-      s.className = `tr ${lang}`;
-      s.textContent = t[lang];
-      el.append(s);
-    }
-  }
-  fill($('#mfoot'), T.foot);
+  /* ---------- szövegek ---------- */
+  const NOPE = [
+    'Naaa, ne csináld! Látni akarlak 🥺',
+    'Naaa, tényleg? Látni akarlak... 🥹',
+    'Csak egy pohár bor, ígérem. Látni akarlak!',
+    'Jó, jó, de a bor már le van hűtve. Látni akarlak 🍷',
+  ];
+  const LIKE = ['Jó irány! 🥂', 'Még egy, és már csak a bor hiányzik.'];
 
   /* ---------- toast ---------- */
   let toastTimer;
-  function toast(t, ms = 2600) {
+  function toast(text, ms = 2600) {
     const el = $('#toast');
-    el.replaceChildren();
-    const hu = document.createElement('div');
-    hu.textContent = t.hu;
-    el.append(hu);
-    for (const lang of ['en', 'zh']) {
-      const s = document.createElement('div');
-      s.className = lang;
-      s.style.opacity = '.8';
-      s.style.fontSize = '.8rem';
-      s.textContent = t[lang];
-      el.append(s);
-    }
+    el.textContent = text;
     el.classList.add('show');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => el.classList.remove('show'), ms);
@@ -101,7 +40,6 @@
   let idx = 0;
   let busy = false;
   let lefts = 0;
-  let rights = 0;
 
   function layout() {
     cards.forEach((c, i) => {
@@ -140,25 +78,24 @@
     const c = cards[idx];
     stamp(c, 'like').style.opacity = '1';
     fly(c, 130, -30, 28);
-    rights++;
     setTimeout(() => {
       idx++;
       if (idx >= cards.length) { showMatch(); busy = false; return; }
       layout();
-      toast(T.like[idx % T.like.length], 1500);
+      toast(LIKE[idx % LIKE.length], 1500);
       busy = false;
     }, FLY - 30);
   }
 
+  // balra húzás: "Naaa, ne csináld, látni akarlak" – a kártya a másik oldalról visszajön
   function nope() {
     if (busy) return;
     busy = true;
     const c = cards[idx];
     stamp(c, 'nope').style.opacity = '1';
     fly(c, -130, 10, -28);
-    toast(T.nope[lefts % T.nope.length], 3000);
+    toast(NOPE[lefts % NOPE.length], 3200);
     lefts++;
-    // bumeráng: a másik oldalról repül vissza
     setTimeout(() => {
       c.style.transition = 'none';
       c.style.transform = 'translate(130vw, 20px) rotate(30deg)';
@@ -235,22 +172,17 @@
   $('#btnAgain').addEventListener('click', () => {
     match.hidden = true;
     match.classList.remove('show');
-    idx = 0; lefts = 0; rights = 0; busy = false;
+    idx = 0; lefts = 0; busy = false;
     cards.forEach(resetCard);
     layout();
   });
 
   $('#btnShare').addEventListener('click', async () => {
-    const where = 'Time Out Market Budapest, Blaha Lujza tér 1.';
-    const msg = [
-      `Match! 🥂 Holnap (${D.hu}) 19:00, ${where}. Pohár bor koccintás, sok nevetés. Ott leszek, Szelma!`,
-      `EN: It's a match! Tomorrow (${D.en}) 19:00, ${where}. A glass of wine, a clink, lots of laughs. See you there, Szelma!`,
-      `中文：配对成功！明天（${D.zh}）19:00，${where}。一杯红酒，碰个杯，多多欢笑。到时见，Szelma！`,
-    ].join('\n');
+    const msg = `Match! 🥂 Holnap (${DATE_HU}) 19:00, Time Out Market Budapest, Blaha Lujza tér 1. Csak egy pohár bor, a többi a második randi 😏 Ott leszek, Szelma!`;
     if (navigator.share) {
       try { await navigator.share({ text: msg }); return; } catch (e) { if (e && e.name === 'AbortError') return; }
     }
-    try { await navigator.clipboard.writeText(msg); toast(T.toastCopy); } catch { toast(T.toastFail); }
+    try { await navigator.clipboard.writeText(msg); toast('Üzenet kimásolva 💬'); } catch { toast('Nem sikerült másolni, jelöld ki kézzel'); }
   });
 
   /* ---------- konfetti: szívek és poharak ---------- */
